@@ -50,8 +50,10 @@ contains all of the different firework types.
 use of external images.
 - The JavaScript should all be ES6-compliant except for use of the ES2017 
 module syntax. In the absence of a browser that supports ES modules one can
-flatten the code with [Rollup][https://github.com/rollup/rollup] or a similar
-tool. I'd include a rolled-up version with a `nomodule` script tag, but
-browser support for this seems to be a bit patchy.
+flatten the code with [Rollup][4] or a similar tool. I'd include a rolled-up
+version with a `nomodule` script tag, but browser support for this seems to
+be a bit patchy.
 - Do say hi - contact details on [my website][1].
+
+[4]: https://github.com/rollup/rollup
 

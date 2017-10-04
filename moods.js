@@ -44,7 +44,7 @@ const Angry      = { title: "angry",      stability: 200, traits: [RedMist, RedF
 export const DefaultMood = { title: "...", traits: [Flame, Virus, Ring, Swarm, Rose, Galaxy, RedFist, GreenBlob, Bawble],
                              stability: 500, max_fireworks: 3 };
 
-export const TestMood = { title: "test",
+export const TestMood = { title: "testy",
                           traits: [Flame, Virus, Ring, Swarm, Rose, Galaxy, RedFist, GreenBlob, Bawble,
                                    Streaker, Burst, Explosion, Crackler, Stars, Snow, RedMist, RedPissed],
                           stability: 200 };

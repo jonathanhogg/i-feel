@@ -368,7 +368,6 @@ export class FireworksDisplay
             case "#test":
                 this.mood = moods.TestMood;
                 this.mood_display.innerHTML = this.mood.title;
-                this.show_stats = true;
                 break;
         }
     }
