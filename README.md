@@ -1,25 +1,26 @@
 
 # I Feel... (2017 redux)
 
-An interactive digital artwork by [Jonathan Hogg][1],
-originally commissioned by [The Resilience Space][2]
+An interactive digital artwork by [Jonathan Hogg][jh],
+originally commissioned by [The Resilience Space][rs]
 
 Copyright 2017 Jonathan Hogg; all rights reserved. This source is provided
 for study purposes only and may not be reproduced, modified or hosted
 without permission.
 
-If you see this code anywhere other than [my website][1] or [on Github][3]
+If you see this code anywhere other than [my website][jh] or [on Github][gh]
 then please let me know.
 
-[1]: https://www.jonathanhogg.com/
-[2]: http://www.theresiliencespace.com/
-[3]: https://github.com/jonathanhogg/feel
+[jh]: https://www.jonathanhogg.com/
+[rs]: http://www.theresiliencespace.com/
+[gh]: https://github.com/jonathanhogg/i-feel
 
 ## Notes
 
 - There are no external code dependencies. This code should work in a good
-modern browser as-is.
-- I wrote this back in 2012 as a commission for [The Resilience Space][2].
+modern browser as-is. You should be able to [preview it right from raw
+Github][rh].
+- I wrote this back in 2012 as a commission for [The Resilience Space][rs].
 The intention was to produce an interactive artwork that would make their
 website a little different and reflect their mission of considering mental
 health at work. This update mostly updates the code to use more recent
@@ -50,10 +51,11 @@ contains all of the different firework types.
 use of external images.
 - The JavaScript should all be ES6-compliant except for use of the ES2017 
 module syntax. In the absence of a browser that supports ES modules one can
-flatten the code with [Rollup][4] or a similar tool. I'd include a rolled-up
+flatten the code with [Rollup][rl] or a similar tool. I'd include a rolled-up
 version with a `nomodule` script tag, but browser support for this seems to
 be a bit patchy.
-- Do say hi - contact details on [my website][1].
+- Do say hi - contact details on [my website][jh].
 
-[4]: https://github.com/rollup/rollup
+[rg]: https://rawgit.com/jonathanhogg/i-feel/master/feel.html
+[rl]: https://github.com/rollup/rollup
 
