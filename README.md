@@ -19,7 +19,7 @@ then please let me know.
 
 - There are no external code dependencies. This code should work in a good
 modern browser as-is. You should be able to [preview it right from raw
-Github][rh].
+Github][rg].
 - I wrote this back in 2012 as a commission for [The Resilience Space][rs].
 The intention was to produce an interactive artwork that would make their
 website a little different and reflect their mission of considering mental
