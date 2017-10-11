@@ -565,7 +565,7 @@ export class FireworksDisplay
     wheel_touch_start(e)
     {
         if (!this.wheel && e.targetTouches.length == 1 && e.changedTouches.length == 1 &&
-            e.targetTouches[0] == e.changedTouches[0])
+            e.targetTouches[0].identifier == e.changedTouches[0].identifier)
         {
             e.preventDefault();
             let touch = e.targetTouches[0],
