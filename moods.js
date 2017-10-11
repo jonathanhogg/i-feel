@@ -55,12 +55,11 @@ export const AllMoods = [Angry, Wired, Brilliant, Anxious, Happy, Frustrated, At
 
 export class MoodWheel
 {
-    constructor(mood, x, y, scale, style)
+    constructor(mood, x, y, style)
     {
         this.current = mood;
         this.x = x;
         this.y = y;
-        this.scale = scale;
         this.push = false;
         this.color = style['color'];
         this.background_color = style['background-color'] || style['backgroundColor'];
@@ -105,7 +104,7 @@ export class MoodWheel
                 distance = Math.sqrt(dx*dx + dy*dy),
                 theta = Math.atan2(dy, dx) - this.theta_start + this.theta_step/2,
                 p = Math.floor(wrap(theta, 2*Math.PI) / this.theta_step),
-                inner_edge = 50 * this.scale, outer_edge = 150 * this.scale;
+                inner_edge = 50, outer_edge = 150;
 
             this.strength = distance > outer_edge ? (inner_edge - Math.min(distance - outer_edge, inner_edge)) / inner_edge
                                                   : Math.min(distance, inner_edge) / inner_edge;
@@ -166,7 +165,7 @@ export class MoodWheel
         context.fillStyle = this.color;
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;
-        context.shadowBlur = 5*this.scale;
+        context.shadowBlur = 5;
         context.shadowColor = this.background_color;
         for (let n = 0; n < this.moods.length; n++)
         {
@@ -179,17 +178,17 @@ export class MoodWheel
             {
                 offset = 60;
                 while (offset < 100) {
-                    var tx = this.x + offset*Math.cos(theta)*this.scale, ty =  this.y + offset*Math.sin(theta)*this.scale,
+                    var tx = this.x + offset*Math.cos(theta), ty =  this.y + offset*Math.sin(theta),
                         dx = tx - this.px, dy = ty - this.py,
-                        d = (dx*dx + dy*dy) / (this.scale * this.scale);
+                        d = dx*dx + dy*dy;
                     if (d > 2500)
                         break;
                     offset++;
                 }
             }
 
-            const font_size = Math.round(offset * this.scale / 3.75);
-            context.translate(offset * this.scale, 0);
+            const font_size = Math.round(offset / 3.75);
+            context.translate(offset, 0);
             context.globalAlpha = alpha * (mood == this.selection ? 1 : 1 - this.strength*0.75)
             context.font = mood == this.current ? "bold " + font_size + "px " + this.font_family
                                                 : this.font_weight + " " + font_size + "px " + this.font_family;
@@ -198,7 +197,7 @@ export class MoodWheel
                 context.translate(context.measureText(text).width, 0);
                 context.rotate(Math.PI);
             }
-            context.fillText(text, 0, 5*this.scale);
+            context.fillText(text, 0, 5);
             context.restore();
         }
         context.restore();

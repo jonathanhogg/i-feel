@@ -38,7 +38,7 @@ class Particle
 {
     initialize(pattern, x, y, direction, spin, drive)
     {
-        this.image = Particle.createImage(pattern);
+        this.pattern = pattern;
         this.x = x;
         this.y = y;
         this.x_speed = 0;
@@ -49,52 +49,53 @@ class Particle
         this.age = 0;
     }
 
-    static createImage(pattern)
+    static createImage(size, color)
     {
         if (!('_cache' in Particle.constructor))
         {
             Particle.constructor._cache = new Map();
         }
-        let bySize = Particle.constructor._cache.get(pattern.color);
+        let bySize = Particle.constructor._cache.get(color);
         if (bySize == undefined)
         {
             bySize = new Map();
-            Particle.constructor._cache.set(pattern.color, bySize);
+            Particle.constructor._cache.set(color, bySize);
         }
-        if (!bySize.has(pattern.size))
+        if (!bySize.has(size))
         {
-            let h = pattern.size/2, canvas = document.createElement('canvas');
-            canvas.width = pattern.size;
-            canvas.height = pattern.size;
+            let h = size/2, canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
             let context = canvas.getContext('2d'),
                 gradient = context.createRadialGradient(h, h, 0, h, h, h);
-            gradient.addColorStop(0, pattern.color);
-            gradient.addColorStop(1, Color.fromHex(pattern.color).alpha(0));
+            gradient.addColorStop(0, color);
+            gradient.addColorStop(1, Color.fromHex(color).alpha(0));
             context.fillStyle = gradient;
             context.globalAlpha = 0.5;
-            context.fillRect(0, 0, pattern.size, pattern.size);
+            context.fillRect(0, 0, size, size);
             gradient = context.createRadialGradient(h, h, 0, h, h, h);
             gradient.addColorStop(0, 'rgb(255,255,255)');
             gradient.addColorStop(0.2, 'rgba(255,255,255,0.75)');
             gradient.addColorStop(0.4, 'rgba(255,255,255,0)');
             context.globalAlpha = 0.75;
             context.fillStyle = gradient;
-            context.fillRect(0, 0, pattern.size, pattern.size);
+            context.fillRect(0, 0, size, size);
             let image = new Image();
             image.src = canvas.toDataURL();
-            bySize.set(pattern.size, image);
+            bySize.set(size, image);
         }
-        return bySize.get(pattern.size);
+        return bySize.get(size);
     }
 
     get size()
     {
-        return this.image.width;
+        return this.pattern.size;
     }
 
-    draw(context, x, y)
+    draw(context, x, y, scale)
     {
-        context.drawImage(this.image, x, y);
+        const image = Particle.createImage(this.pattern.size*scale, this.pattern.color);
+        context.drawImage(image, x, y, this.pattern.size, this.pattern.size);
     }
 }
 
@@ -240,7 +241,7 @@ class Firework
         }
     }
 
-    draw(context, width, height)
+    draw(context, width, height, scale)
     {
         context.save();
         const np = this.particles.length, nd = this.death_row.length, npd = np + nd,
@@ -257,14 +258,14 @@ class Firework
                 context.globalAlpha = age * brightness;
                 let xo = xt < 0 ? xt + width : (xt > width - size ? xt - width : 0),
                     yo = yt < 0 ? yt + height : (yt > height - size ? yt - height : 0);
-                particle.draw(context, xt, yt);
+                particle.draw(context, xt, yt, scale);
                 if (xo != 0)
-                    particle.draw(context, xo, yt);
+                    particle.draw(context, xo, yt, scale);
                 if (yo != 0)
                 {
-                    particle.draw(context, xt, yo);
+                    particle.draw(context, xt, yo, scale);
                     if (xo != 0)
-                        particle.draw(context, xo, yo);
+                        particle.draw(context, xo, yo, scale);
                 }
             }
         }
@@ -281,19 +282,19 @@ export class FireworksDisplay
         this.container = document.getElementById(container_id);
         this.mood_display = document.getElementById(mood_display_id);
         this.canvas = document.createElement('canvas');
-        this.canvas.setAttribute('style', 'width: 100%; height: 100%;');
+        this.canvas.setAttribute('style', 'width: 100%; height: 100%; padding: 0; margin: 0;');
         this.context = this.canvas.getContext('2d');
 
         const width = this.container.clientWidth, height = this.container.clientHeight,
               diagonal = Math.sqrt(width*width + height*height);
-        this.scale = Math.ceil(SCALE_PIXELS / diagonal);
-        this.width = width * this.scale;
-        this.height = height * this.scale;
-        this.max_fireworks = Math.ceil(diagonal*this.scale / PIXELS_PER_FIREWORK);
+        this.scale = window.devicePixelRatio;
+        this.width = width;
+        this.height = height;
+        this.max_fireworks = Math.ceil(diagonal / PIXELS_PER_FIREWORK);
         this.show_stats = false;
         this.wheel = null;
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
+        this.canvas.width = this.width * this.scale;
+        this.canvas.height = this.height * this.scale;
         this.container.appendChild(this.canvas);
         this.fireworks = [];
         this.dying_fireworks = [];
@@ -476,29 +477,30 @@ export class FireworksDisplay
             width = this.container.clientWidth,
             height = this.container.clientHeight,
             diagonal = Math.sqrt(width*width + height*height);
-        this.scale = Math.ceil(SCALE_PIXELS / diagonal);
-        this.width = width *= this.scale;
-        this.height = height *= this.scale;
+        this.scale = window.devicePixelRatio;
+        this.width = width;
+        this.height = height;
         this.max_fireworks = Math.ceil(diagonal*this.scale / PIXELS_PER_FIREWORK);
-        if (width != canvas.width || height != canvas.height)
+        if (canvas.width != width*this.scale || canvas.height != height*this.scale)
         {
-            canvas.width = width;
-            canvas.height = height;
+            canvas.width = width * this.scale;
+            canvas.height = height * this.scale;
         }
 
         context.save();
+        context.scale(this.scale, this.scale);
         context.clearRect(0, 0, width, height);
 
         let firework_count = 0, particle_count = 0;
         context.globalCompositeOperation = 'lighter';
         for (let firework of fireworks)
         {
-            particle_count += firework.draw(context, width, height);
+            particle_count += firework.draw(context, width, height, this.scale);
             firework_count++;
         }
         for (let firework of dying_fireworks)
         {
-            particle_count += firework.draw(context, width, height);
+            particle_count += firework.draw(context, width, height, this.scale);
             firework_count++;
         }
         while (dying_fireworks.length > 0 && dying_fireworks[0].is_empty)
@@ -542,24 +544,24 @@ export class FireworksDisplay
     wheel_down(e)
     {
         if (this.wheel)
-            this.wheel.down(e.clientX*this.scale, e.clientY*this.scale);
+            this.wheel.down(e.clientX, e.clientY);
         else
         {
             let style = window.getComputedStyle(this.container);
-            this.wheel = new moods.MoodWheel(this.mood, e.clientX*this.scale, e.clientY*this.scale, this.scale, style);
+            this.wheel = new moods.MoodWheel(this.mood, e.clientX, e.clientY, style);
         }
     }
 
     wheel_move(e)
     {
         if (this.wheel)
-            this.wheel.move(e.clientX*this.scale, e.clientY*this.scale);
+            this.wheel.move(e.clientX, e.clientY);
     }
 
     wheel_up(e)
     {
         if (this.wheel)
-            this.wheel.up(e.clientX*this.scale, e.clientY*this.scale);
+            this.wheel.up(e.clientX, e.clientY);
     }
 
     wheel_touch_start(e)
@@ -570,7 +572,7 @@ export class FireworksDisplay
             e.preventDefault();
             let touch = e.targetTouches[0],
                 style = window.getComputedStyle(this.container);
-            this.wheel = new moods.MoodWheel(this.mood, touch.clientX*this.scale, touch.clientY*this.scale, this.scale, style);
+            this.wheel = new moods.MoodWheel(this.mood, touch.clientX, touch.clientY, style);
             this.wheel.allow_sticky = false;
             this.wheel.push = true;
             this.wheel.touch_identifier = touch.identifier;
@@ -585,7 +587,7 @@ export class FireworksDisplay
                 if (touch.identifier == this.wheel.touch_identifier)
                 {
                     e.preventDefault();
-                    this.wheel.move(touch.clientX*this.scale, touch.clientY*this.scale);
+                    this.wheel.move(touch.clientX, touch.clientY);
                     return;
                 }
             }
@@ -599,7 +601,7 @@ export class FireworksDisplay
                 if (touch.identifier == this.wheel.touch_identifier)
                 {
                     e.preventDefault();
-                    this.wheel.up(touch.clientX*this.scale, touch.clientY*this.scale);
+                    this.wheel.up(touch.clientX, touch.clientY);
                     return;
                 }
             }
