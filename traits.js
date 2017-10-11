@@ -248,7 +248,6 @@ export class Swarm extends FireworkTraits
         this.particle_creation_rate = 0.2;
         this.particle_start_spin = [-0.5, -0.25, 0.25, 0.5];
         this.particle_start_drive = [1, 2, 3, 4, 5];
-        this.particle_drag = 0.01;
         this.randomness = 0.5;
     }
 }
