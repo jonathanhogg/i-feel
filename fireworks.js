@@ -24,13 +24,12 @@ import {DeadDuck} from './traits.js';
 import * as moods from './moods.js';
 
 
-const MAXIMUM_FRAME_RATE       = 60,
-      TARGET_ANIMATION_RATE    = 50,
-      GOOD_DRAW_RATE           = 30,
-      BAD_DRAW_RATE            = 20,
+const TARGET_ANIMATION_RATE    = 40,
+      DECENT_DRAW_RATE         = 30,
+      ACCEPTABLE_DRAW_RATE     = 25,
       NOTIONAL_ANIMATION_RATE  = 20,
       FIREWORK_CHANGE_INTERVAL = 5000,
-      PIXELS_PER_FIREWORK      = 350**2;
+      PIXELS_PER_FIREWORK      = 300**2;
 
 
 class Particle
@@ -399,7 +398,7 @@ export class FireworksDisplay
             await new Promise(requestAnimationFrame);
 
             let now = performance.now(),
-                delta = this.animation_counter.depth > 0 ? now - this.animation_counter.last_time : 1000 / MAXIMUM_FRAME_RATE,
+                delta = this.animation_counter.depth > 0 ? now - this.animation_counter.last_time : 1000 / NOTIONAL_ANIMATION_RATE,
                 frame_ratio = Math.min(1, delta / 1000 * NOTIONAL_ANIMATION_RATE);
             if (delta > 500 || (this.animation_counter.depth > 5 && delta > 5*this.animation_counter.average_interval))
             {
@@ -411,7 +410,7 @@ export class FireworksDisplay
 
             now = performance.now();
             let drawing_rate = this.drawing_counter.test(now);
-            if (!dropped_last_frame && drawing_rate > GOOD_DRAW_RATE && this.animation_counter.frame_rate < TARGET_ANIMATION_RATE)
+            if (!dropped_last_frame && drawing_rate > ACCEPTABLE_DRAW_RATE && this.animation_counter.frame_rate < TARGET_ANIMATION_RATE)
             {
                 dropped_last_frame = true;
             }
@@ -424,21 +423,19 @@ export class FireworksDisplay
 
             if (this.drawing_counter.full)
             {
-                drawing_rate = this.drawing_counter.frame_rate;
                 let num_fireworks = this.fireworks.length + this.dying_fireworks.length,
-                    max_fireworks = this.mood.max_fireworks ? Math.min(this.max_fireworks, this.mood.max_fireworks)
-                                                            : this.max_fireworks,
-                    can_change_fireworks = now > this.last_firework_time + FIREWORK_CHANGE_INTERVAL;
+                    max_fireworks = this.mood.max_fireworks ? Math.min(this.max_fireworks, this.mood.max_fireworks) : this.max_fireworks;
 
-                if (can_change_fireworks && (num_fireworks > max_fireworks || (num_fireworks > 1 && drawing_rate < BAD_DRAW_RATE)))
+                if (now > this.last_firework_time + FIREWORK_CHANGE_INTERVAL)
                 {
-                    this.dropFirework();
-                    this.drawing_counter.reset();
-                }
-                else if (drawing_rate > GOOD_DRAW_RATE && num_fireworks < max_fireworks && can_change_fireworks)
-                {
-                    this.addFirework();
-                    this.drawing_counter.reset();
+                    if (num_fireworks > max_fireworks || (num_fireworks > 1 && drawing_rate < ACCEPTABLE_DRAW_RATE))
+                    {
+                        this.dropFirework();
+                    }
+                    else if (num_fireworks < max_fireworks && drawing_rate > DECENT_DRAW_RATE)
+                    {
+                        this.addFirework();
+                    }
                 }
             }
         }

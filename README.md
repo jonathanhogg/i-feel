@@ -40,9 +40,9 @@ a mood defines the different traits that will be chosen from at random and
 how often the fireworks will change.
 - The notional frame rate for animation is 20fps; however, a ratio is applied
 to all calculated movements to support a variable animation rate. The code
-actually attempts to target at least 50fps for the animation part of the
+actually attempts to target at least 40fps for the animation part of the
 cycle, draw frames will be dropped if necessary to achieve this. If the draw
-rate falls below 20fps then fireworks will be successively dropped from the
+rate falls below 25fps then fireworks will be successively dropped from the
 display. These values are constants at the top of `fireworks.js`.
 - Add the `#stats` location hash to the URL to turn on display of animation
 and draw rates, and firework and particle counts. Add the `#test` location
