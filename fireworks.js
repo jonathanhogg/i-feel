@@ -480,7 +480,7 @@ export class FireworksDisplay
         this.scale = window.devicePixelRatio;
         this.width = width;
         this.height = height;
-        this.max_fireworks = Math.ceil(diagonal*this.scale / PIXELS_PER_FIREWORK);
+        this.max_fireworks = Math.ceil(diagonal / PIXELS_PER_FIREWORK);
         if (canvas.width != width*this.scale || canvas.height != height*this.scale)
         {
             canvas.width = width * this.scale;
