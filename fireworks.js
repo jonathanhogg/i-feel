@@ -30,8 +30,7 @@ const MAXIMUM_FRAME_RATE       = 60,
       BAD_DRAW_RATE            = 20,
       NOTIONAL_ANIMATION_RATE  = 20,
       FIREWORK_CHANGE_INTERVAL = 5000,
-      SCALE_PIXELS             = 866,
-      PIXELS_PER_FIREWORK      = 200;
+      PIXELS_PER_FIREWORK      = 350**2;
 
 
 class Particle
@@ -285,12 +284,11 @@ export class FireworksDisplay
         this.canvas.setAttribute('style', 'width: 100%; height: 100%; padding: 0; margin: 0;');
         this.context = this.canvas.getContext('2d');
 
-        const width = this.container.clientWidth, height = this.container.clientHeight,
-              diagonal = Math.sqrt(width*width + height*height);
+        const width = this.container.clientWidth, height = this.container.clientHeight;
         this.scale = window.devicePixelRatio;
         this.width = width;
         this.height = height;
-        this.max_fireworks = Math.ceil(diagonal / PIXELS_PER_FIREWORK);
+        this.max_fireworks = Math.ceil(width*height / PIXELS_PER_FIREWORK);
         this.show_stats = false;
         this.wheel = null;
         this.canvas.width = this.width * this.scale;
@@ -475,12 +473,11 @@ export class FireworksDisplay
             fireworks = this.fireworks,
             dying_fireworks = this.dying_fireworks,
             width = this.container.clientWidth,
-            height = this.container.clientHeight,
-            diagonal = Math.sqrt(width*width + height*height);
+            height = this.container.clientHeight;
         this.scale = window.devicePixelRatio;
         this.width = width;
         this.height = height;
-        this.max_fireworks = Math.ceil(diagonal / PIXELS_PER_FIREWORK);
+        this.max_fireworks = Math.ceil(width*height / PIXELS_PER_FIREWORK);
         if (canvas.width != width*this.scale || canvas.height != height*this.scale)
         {
             canvas.width = width * this.scale;
