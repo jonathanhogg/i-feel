@@ -5,12 +5,12 @@
  * An interactive digital artwork by [Jonathan Hogg][1],
  * originally commissioned by [The Resilience Space][2]
  *
- * Copyright 2017 Jonathan Hogg; all rights reserved. This source is provided
- * for study purposes only and may not be reproduced, modified or hosted
- * without permission.
+ * Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
+ * Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
  *
  * [1]: https://www.jonathanhogg.com/
  * [2]: http://www.theresiliencespace.com/
+ * [3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * ## fireworks.js
  *
@@ -566,10 +566,7 @@ export class FireworksDisplay
             e.preventDefault();
             let touch = e.targetTouches[0],
                 style = window.getComputedStyle(this.container);
-            this.wheel = new moods.MoodWheel(this.mood, touch.clientX, touch.clientY, style);
-            this.wheel.allow_sticky = false;
-            this.wheel.push = true;
-            this.wheel.touch_identifier = touch.identifier;
+            this.wheel = new moods.MoodWheel(this.mood, touch.clientX, touch.clientY, style, touch.identifier);
         }
     }
 

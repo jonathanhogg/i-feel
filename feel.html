@@ -9,47 +9,68 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <script type="module" src="feel.js"></script>
-        <!--script defer nomodule src="feel-rollup.js"></script-->
         <style>
-            body { margin: 0; }
+            body {
+                margin: 0;
+                color: white;
+                font-family: "Helvetica Neue",helvetica,arial,sans-serif;
+                font-weight: 300;
+            }
+
+            a { color: inherit; }
 
             #container {
                 position: absolute;
-                left: 0px;
-                top: 0px;
+                left: 0;
+                top: 0;
                 height: 100%;
                 width: 100%;
                 background-color: black;
-                font-family: "Helvetica Neue",helvetica,arial,sans-serif;
-                font-weight: 300;
-                text-shadow: 0 0 0.25em black;
-                color: white;
+            }
+
+            a.ribbon {
+                position: absolute;
+                display: block;
+                right: 0;
+                top: 0;
+                background-color: #555;
+                font-size: 14px;
+                text-align: center;
+                text-decoration: none;
+                width: 200px;
+                line-height: 40px;
+                border: 1px solid;
+                transform-origin: 200px 0;
+                transform: rotate(45deg) translate(100px,55px);
             }
 
             #info {
                 position: absolute;
-                margin: 50px;
+                margin: 40px;
                 left: 0;
                 bottom: 0;
                 font-size: 16px;
-                opacity: 0.25;
-                transition: opacity 250ms 0ms linear;
+                text-shadow: 0 0 0.25em black;
             }
-            #info:hover { opacity: 1; }
 
             #credit { font-size: 14px; }
-            #credit a, #credit a:visited { color: inherit; }
+
+            .faded {
+                opacity: 0.5;
+                transition: opacity 100ms 0ms linear;
+            }
+            .faded:hover { opacity: 1; }
         </style>
     </head>
     <body>
-        <div id="container">
-            <div id="info">
-                I feel <span id="mood">…</span> (2017 redux)
-                <div id="credit">
-                    An interactive digital artwork originally commissioned by
-                    <a href="http://theresiliencespace.com/" target="_blank">The&nbsp;Resilience&nbsp;Space</a>
-                </div>
+        <div id="container"></div>
+        <div id="info" class="faded">
+            I feel <span id="mood">…</span> (2017 redux)
+            <div id="credit">
+                An interactive digital artwork originally commissioned by
+                <a href="http://theresiliencespace.com/" target="_blank">The&nbsp;Resilience&nbsp;Space</a>
             </div>
         </div>
+        <a class="faded ribbon" target="_blank" href="https://github.com/jonathanhogg/i-feel/">Read me on GitHub</a>
     </body>
 </html>

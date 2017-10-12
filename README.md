@@ -4,16 +4,25 @@
 An interactive digital artwork by [Jonathan Hogg][jh],
 originally commissioned by [The Resilience Space][rs]
 
-Copyright 2017 Jonathan Hogg; all rights reserved. This source is provided
-for study purposes only and may not be reproduced, modified or hosted
-without permission.
+Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc].
 
-If you see this code anywhere other than [my website][jh] or [on Github][gh]
-then please let me know.
+![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
+
+In short, you're welcome to use, share and remix this artwork provided
+that: you do not do so commercially; you acknowledge me as the original
+artist; you mark clearly any derivative version and you apply the same license
+to any such work. Note that my summary here is not a substitute for the [full
+license text][cl].
+
+If you wish to use this work outside of these terms, then please contact
+me to discuss; you'll find contact details on [my website][jh].
 
 [jh]: https://www.jonathanhogg.com/
 [rs]: http://www.theresiliencespace.com/
 [gh]: https://github.com/jonathanhogg/i-feel
+[cc]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cl]: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
 ## Notes
 

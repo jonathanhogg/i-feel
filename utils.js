@@ -5,12 +5,12 @@
  * An interactive digital artwork by [Jonathan Hogg][1],
  * originally commissioned by [The Resilience Space][2]
  *
- * Copyright 2017 Jonathan Hogg; all rights reserved. This source is provided
- * for study purposes only and may not be reproduced, modified or hosted
- * without permission.
+ * Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
+ * Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
  *
  * [1]: https://www.jonathanhogg.com/
  * [2]: http://www.theresiliencespace.com/
+ * [3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * ## utils.js
  *
