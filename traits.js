@@ -1,23 +1,24 @@
 
 /*
- * # I Feel... (2017 redux)
- *
- * An interactive digital artwork by [Jonathan Hogg][1],
- * originally commissioned by [The Resilience Space][2]
- *
- * Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
- * Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
- *
- * [1]: https://www.jonathanhogg.com/
- * [2]: http://www.theresiliencespace.com/
- * [3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
- *
- * ## traits.js
- *
- * This module defines named sets of parameters that describe the behaviour
- * and look of each type of firework.
- *
- */
+
+# I Feel... (2017 redux)
+
+An interactive digital artwork by [Jonathan Hogg][1],
+originally commissioned by [The Resilience Space][2]
+
+Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
+
+[1]: https://www.jonathanhogg.com/
+[2]: http://www.theresiliencespace.com/
+[3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+## traits.js
+
+This module defines named sets of parameters that describe the behaviour
+and look of each type of firework.
+
+*/
 
 
 import {choose, random, normal} from './utils.js';
