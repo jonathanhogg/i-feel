@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<!--
+
+# I Feel... (2017 redux)
+
+An interactive digital artwork by [Jonathan Hogg][1],
+originally commissioned by [The Resilience Space][2]
+
+Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
+
+[1]: https://www.jonathanhogg.com/
+[2]: http://www.theresiliencespace.com/
+[3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+-->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -55,6 +70,17 @@
 
             #credit { font-size: 14px; }
 
+            #license {
+                position: absolute;
+                display: block;
+                margin: 40px;
+                right: 0;
+                bottom: 0;
+                width: 80px;
+                height: 15px;
+                background-image: url(https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png);
+            }
+
             .faded {
                 opacity: 0.5;
                 transition: opacity 100ms 0ms linear;
@@ -67,10 +93,11 @@
         <div id="info" class="faded">
             I feel <span id="mood">…</span> (2017 redux)
             <div id="credit">
-                An interactive digital artwork originally commissioned by
-                <a href="http://theresiliencespace.com/" target="_blank">The&nbsp;Resilience&nbsp;Space</a>
+                An interactive digital artwork by <a href="https://www.jonathanhogg.com/" target="_blank">Jonathan&nbsp;Hogg</a>,
+                originally commissioned by <a href="http://theresiliencespace.com/" target="_blank">The&nbsp;Resilience&nbsp;Space</a>
             </div>
         </div>
-        <a class="faded ribbon" target="_blank" href="https://github.com/jonathanhogg/i-feel/">Read me on GitHub</a>
+        <a id="license" rel="license" class="faded" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"></a>
+        <a class="faded ribbon" target="_blank" href="https://github.com/jonathanhogg/i-feel/">Find me on GitHub</a>
     </body>
 </html>

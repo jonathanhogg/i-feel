@@ -1,22 +1,23 @@
 
 /*
- * # I Feel... (2017 redux)
- *
- * An interactive digital artwork by [Jonathan Hogg][1],
- * originally commissioned by [The Resilience Space][2]
- *
- * Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
- * Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
- *
- * [1]: https://www.jonathanhogg.com/
- * [2]: http://www.theresiliencespace.com/
- * [3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
- *
- * ## fireworks.js
- *
- * This module contains the bulk of the physics and drawing engines.
- *
- */
+
+# I Feel... (2017 redux)
+
+An interactive digital artwork by [Jonathan Hogg][1],
+originally commissioned by [The Resilience Space][2]
+
+Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
+
+[1]: https://www.jonathanhogg.com/
+[2]: http://www.theresiliencespace.com/
+[3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+## fireworks.js
+
+This module contains the bulk of the physics and drawing engines.
+
+*/
 
 
 import {choose, random, wrap, FrameCounter, Color} from './utils.js';

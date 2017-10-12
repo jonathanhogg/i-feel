@@ -1,24 +1,25 @@
 
 /*
- * # I Feel... (2017 redux)
- *
- * An interactive digital artwork by [Jonathan Hogg][1],
- * originally commissioned by [The Resilience Space][2]
- *
- * Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
- * Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
- *
- * [1]: https://www.jonathanhogg.com/
- * [2]: http://www.theresiliencespace.com/
- * [3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
- *
- * ## moods.js
- *
- * This module defines the combinations of firework traits that represent each 
- * "mood". It also contains the logic for the radial menu that is used to 
- * select a mood.
- *
- */
+
+# I Feel... (2017 redux)
+
+An interactive digital artwork by [Jonathan Hogg][1],
+originally commissioned by [The Resilience Space][2]
+
+Copyright 2017 Jonathan Hogg. This work is licensed under the [Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
+
+[1]: https://www.jonathanhogg.com/
+[2]: http://www.theresiliencespace.com/
+[3]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+## moods.js
+
+This module defines the combinations of firework traits that represent each 
+"mood". It also contains the logic for the radial menu that is used to 
+select a mood.
+
+*/
 
 
 import {wrap} from './utils.js';
