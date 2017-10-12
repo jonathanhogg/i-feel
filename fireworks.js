@@ -391,55 +391,51 @@ export class FireworksDisplay
         this.last_firework_time = performance.now();
     }
 
-    async loop()
+    loop(dropped_last_frame=false)
     {
-        let dropped_last_frame = false;
-        while (true)
+        let now = performance.now(),
+            delta = this.animation_counter.depth > 0 ? now - this.animation_counter.last_time : 1000 / NOTIONAL_ANIMATION_RATE,
+            frame_ratio = Math.min(1, delta / 1000 * NOTIONAL_ANIMATION_RATE);
+        if (delta > 500 || (this.animation_counter.depth > 5 && delta > 5*this.animation_counter.average_interval))
         {
-            await new Promise(requestAnimationFrame);
+            this.animation_counter.reset();
+            this.drawing_counter.reset();
+        }
+        this.animation_counter.push(now);
+        this.doAnimation(frame_ratio);
 
-            let now = performance.now(),
-                delta = this.animation_counter.depth > 0 ? now - this.animation_counter.last_time : 1000 / NOTIONAL_ANIMATION_RATE,
-                frame_ratio = Math.min(1, delta / 1000 * NOTIONAL_ANIMATION_RATE);
-            if (delta > 500 || (this.animation_counter.depth > 5 && delta > 5*this.animation_counter.average_interval))
-            {
-                this.animation_counter.reset();
-                this.drawing_counter.reset();
-            }
-            this.animation_counter.push(now);
-            this.doAnimation(frame_ratio);
+        now = performance.now();
+        let drawing_rate = this.drawing_counter.test(now);
+        if (!dropped_last_frame && drawing_rate > ACCEPTABLE_DRAW_RATE && this.animation_counter.frame_rate < TARGET_ANIMATION_RATE)
+        {
+            dropped_last_frame = true;
+        }
+        else
+        {
+            dropped_last_frame = false;
+            this.drawing_counter.push(now);
+            this.doDrawing();
+        }
 
-            now = performance.now();
-            let drawing_rate = this.drawing_counter.test(now);
-            if (!dropped_last_frame && drawing_rate > ACCEPTABLE_DRAW_RATE && this.animation_counter.frame_rate < TARGET_ANIMATION_RATE)
-            {
-                dropped_last_frame = true;
-            }
-            else
-            {
-                dropped_last_frame = false;
-                this.drawing_counter.push(now);
-                this.doDrawing();
-            }
+        if (this.drawing_counter.full)
+        {
+            let num_fireworks = this.fireworks.length + this.dying_fireworks.length,
+                max_fireworks = this.mood.max_fireworks ? Math.min(this.max_fireworks, this.mood.max_fireworks) : this.max_fireworks;
 
-            if (this.drawing_counter.full)
+            if (now > this.last_firework_time + FIREWORK_CHANGE_INTERVAL)
             {
-                let num_fireworks = this.fireworks.length + this.dying_fireworks.length,
-                    max_fireworks = this.mood.max_fireworks ? Math.min(this.max_fireworks, this.mood.max_fireworks) : this.max_fireworks;
-
-                if (now > this.last_firework_time + FIREWORK_CHANGE_INTERVAL)
+                if (num_fireworks > max_fireworks || (num_fireworks > 1 && drawing_rate < ACCEPTABLE_DRAW_RATE))
                 {
-                    if (num_fireworks > max_fireworks || (num_fireworks > 1 && drawing_rate < ACCEPTABLE_DRAW_RATE))
-                    {
-                        this.dropFirework();
-                    }
-                    else if (num_fireworks < max_fireworks && drawing_rate > DECENT_DRAW_RATE)
-                    {
-                        this.addFirework();
-                    }
+                    this.dropFirework();
+                }
+                else if (num_fireworks < max_fireworks && drawing_rate > DECENT_DRAW_RATE)
+                {
+                    this.addFirework();
                 }
             }
         }
+
+        requestAnimationFrame(() => this.loop(dropped_last_frame));
     }
 
     doAnimation(frame_ratio)
@@ -505,7 +501,7 @@ export class FireworksDisplay
 
         if (this.show_stats)
         {
-            let x = 50, y = height - 30;
+            let x = 40, y = height - 20;
             let text = "Animation rate: " + Math.round(this.animation_counter.frame_rate) 
                      + " fps; draw rate: " + Math.round(this.drawing_counter.frame_rate) 
                      + " fps; fireworks: " + firework_count + " (" + particle_count + " particles)";
