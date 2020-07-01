@@ -468,4 +468,3 @@ export class DeadDuck extends FireworkTraits
         this.conformity = 0;
     }
 }
-

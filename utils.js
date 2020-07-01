@@ -140,4 +140,3 @@ export class Color
         return new Color(this.r, this.g, this.b, a);
     }
 }
-

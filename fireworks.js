@@ -502,8 +502,8 @@ export class FireworksDisplay
         if (this.show_stats)
         {
             let x = 40, y = height - 20;
-            let text = "Animation rate: " + Math.round(this.animation_counter.frame_rate) 
-                     + " fps; draw rate: " + Math.round(this.drawing_counter.frame_rate) 
+            let text = "Animation rate: " + Math.round(this.animation_counter.frame_rate)
+                     + " fps; draw rate: " + Math.round(this.drawing_counter.frame_rate)
                      + " fps; fireworks: " + firework_count + " (" + particle_count + " particles)";
 
             let style = window.getComputedStyle(this.container);
@@ -609,4 +609,3 @@ export class FireworksDisplay
             }
     }
 }
-

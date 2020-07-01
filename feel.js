@@ -23,4 +23,3 @@ This module provides an example "entry point" for using the code.
 import {FireworksDisplay} from './fireworks.js';
 
 const display = new FireworksDisplay("container", "mood");
-

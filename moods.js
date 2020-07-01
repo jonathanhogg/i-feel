@@ -15,8 +15,8 @@ Commons Attribution-NonCommercial-ShareAlike 4.0 International License][3].
 
 ## moods.js
 
-This module defines the combinations of firework traits that represent each 
-"mood". It also contains the logic for the radial menu that is used to 
+This module defines the combinations of firework traits that represent each
+"mood". It also contains the logic for the radial menu that is used to
 select a mood.
 
 */
@@ -208,4 +208,3 @@ export class MoodWheel
         return false;
     }
 }
-

@@ -63,7 +63,7 @@ density, but scaled to the CSS pixel size; so on a high resolution display
 (such as an Apple retina display), the drawing should look crisp but will
 retain the same overall look. Note that high resolution displays mean *much*
 more pixel blitting, so your mileage may vary.
-- The JavaScript should all be ES6-compliant except for use of the ES2017 
+- The JavaScript should all be ES6-compliant except for use of the ES2017
 module syntax. In the absence of a browser that supports ES modules one can
 flatten the code with [Rollup][rl] or a similar tool. I'd include a rolled-up
 version with a `nomodule` script tag, but browser support for this seems to
@@ -72,4 +72,3 @@ be a bit patchy.
 
 [rg]: https://rawgit.com/jonathanhogg/i-feel/master/feel.html
 [rl]: https://github.com/rollup/rollup
-
