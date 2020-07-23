@@ -70,5 +70,5 @@ version with a `nomodule` script tag, but browser support for this seems to
 be a bit patchy.
 - Do say hi - contact details on [my website][jh].
 
-[rg]: https://rawgit.com/jonathanhogg/i-feel/master/feel.html
+[rg]: https://rawgit.com/jonathanhogg/i-feel/main/feel.html
 [rl]: https://github.com/rollup/rollup
