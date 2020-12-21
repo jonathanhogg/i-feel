@@ -39,8 +39,14 @@ self-contained.
 - Click anywhere to bring up the `MoodWheel` radial menu. If touch events
 are available, then the mood wheel will respond to these and will alter its
 display to better support a finger by pushing the mood names out of the way
-so that they can be clearly read and selected. Firefox *hates* the mood
-wheel - it may be their implementation of canvas text, I'm not sure.
+so that they can be clearly read and selected.
+- The `background-color` of the canvas container element is used to fade-out
+the particle display while the mood wheel is active – this is done by drawing
+an alpha-faded rectangle in this colour over the top of the particles before
+the mood wheel is drawn. Firefox **hates** this and will slow the animation to
+a ridiculous degree (seconds-per-frame). Avoid having a `background-color` on
+the container if you want this to work in Firefox; see [my own website][jh] for
+a hacky example of browser-specific CSS for this.
 - Each spot is a `Particle`; a group of these particles is a `Firework`,
 the behaviour and look of which is controlled by a `FireworkTraits` object -
 these can be (and are) switched on-the-fly to cause a firework to transition
